@@ -3,12 +3,12 @@ import praw
 import pandas as pd
 import time
 
-# Hardcoded Reddit API credentials
+
 CLIENT_ID = "sDw5OFBsPITLReIfzBIuog"
 CLIENT_SECRET = "ZaUehHHivPoV2cN-_fhMh_D8ZGFfKQ"
 USER_AGENT = "research_project:v1.0 (by u/AlarmedEconomist9336)"
 
-# Initialize PRAW
+
 reddit = praw.Reddit(
     client_id=CLIENT_ID,
     client_secret=CLIENT_SECRET,
@@ -16,7 +16,7 @@ reddit = praw.Reddit(
 )
 
 
-# Function to scrape subreddit
+
 def scrape_subreddit(subreddit_name, max_posts=100):
     """
     Scrape posts and comments from a subreddit.
@@ -44,7 +44,7 @@ def scrape_subreddit(subreddit_name, max_posts=100):
             }
             posts_data.append(post)
             post_count += 1
-            time.sleep(1)  # Delay to respect API limits
+            time.sleep(1) 
             if post_count >= max_posts:
                 break
 
@@ -55,10 +55,10 @@ def scrape_subreddit(subreddit_name, max_posts=100):
         return pd.DataFrame(posts_data)
 
 
-# Streamlit UI
+
 st.title("Reddit Subreddit Scraper")
 
-# User inputs
+
 subreddit_name = st.text_input("Enter the name of the subreddit:", value="")
 max_posts = st.number_input("Enter the number of posts to scrape:", min_value=1, max_value=1000, value=100)
 
@@ -70,7 +70,7 @@ if st.button("Scrape Subreddit"):
                 st.success("Scraping complete!")
                 st.dataframe(data)
 
-                # Provide download option for the scraped data
+          
                 csv = data.to_csv(index=False)
                 st.download_button(
                     label="Download CSV",
